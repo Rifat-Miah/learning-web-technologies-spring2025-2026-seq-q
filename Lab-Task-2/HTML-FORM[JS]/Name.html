@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name</title>
+</head>
+<body>
+    <form action="" onsubmit="return validateForm()">
+        <label for="">Name</label><br>
+        <input type="text" id="name"><br><br>
+        <input type="submit" value="submit">
+        <p id="error" style="color: blue;"></p>
+    </form>
+
+    <script>
+        function validateForm() {
+            let name = document.getElementById("name").value;
+            let error = document.getElementById("error");
+
+            if(name == "") {
+                error.innerHTML = "Name cannot be empty.";
+                return false;
+            }
+
+            let words = name.trim().split(" ");
+            if(words.length < 2){
+                error.innerHTML = "Name must contain at least 2 words.";
+                return false;
+            }
+
+            for(let i=0; i<name.length; i++) {
+                let ch = name.charAt(i);
+                if(!((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || ch == '.' || ch == '-' ||ch == ' ')) {
+                    error.innerHTML = "Name can contain a-z or A-Z or dot(.) or dash(-) ";
+                    return false;
+                }
+            }
+
+            var firstChar = name.charAt(0);
+            if (!((firstChar >= 'A' && firstChar <= 'Z') || (firstChar >= 'a' && firstChar <= 'z'))) {
+                error.innerHTML = "Name must start with a letter";
+                return false;
+            }
+
+            error.innerHTML = "";
+            alert("Form submitted successfully!");
+            return true;
+        }
+
+    </script>
+    
+</body>
+</html>

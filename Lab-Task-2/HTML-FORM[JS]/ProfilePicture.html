@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Picture</title>
+</head>
+<body>
+    <fieldset>
+        <form action="" onsubmit="return validateProfile()">
+        <label for="Profile">Profile Picture</label><br><br>
+        User Id
+        <input type="text" id="userid"><br><br>
+        Picture 
+        <input type="file" id="picture"><br><br>
+        <input type="submit" value="Submit">
+        <p id="error" style="color:red;"></p>
+
+    </form>  
+    </fieldset>
+    <script>
+    function validateProfile() {
+
+        let userId = document.getElementById("userid").value;
+        let picture = document.getElementById("picture").value;
+        let error = document.getElementById("error");
+
+        error.innerHTML = "";
+
+        if (userId == "") {
+            error.innerHTML = "User ID cannot be empty.";
+            return false;
+        }
+
+        if (isNaN(userId) || Number(userId) <= 0) {
+            error.innerHTML = "User ID must be a positive number.";
+            return false;
+        }
+
+        if (picture == "") {
+            error.innerHTML = "Please select a picture.";
+            return false;
+        }
+
+        alert("Form submitted successfully!");
+        return false; 
+    }
+</script>
+</body>
+</html>

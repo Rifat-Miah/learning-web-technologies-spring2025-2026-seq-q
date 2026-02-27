@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gender</title>
+</head>
+<body>
+    <fieldset>
+        <h3>Gender</h3>
+        <form action="" onsubmit="return validateGender()">
+            <input type="radio" name="gender" value="Male">Male
+            <input type="radio" name="gender" value="Female">Female
+            <input type="radio" name="gender" value="Other">Other
+            <br><br>
+            <input type="submit" value="Submit">
+            <p id="error" style="color:red;"></p>
+        </form>
+    </fieldset>
+
+    <script>
+    function validateGender() {
+
+        let genders = document.getElementsByName("gender");
+        let error = document.getElementById("error");
+        let selected = false;
+
+        
+        for (let i = 0; i < genders.length; i++) {
+            if (genders[i].checked) {
+                selected = true;
+                break;
+            }
+        }
+
+        if (!selected) {
+            error.innerHTML = "At least one of them has to be selected .";
+            return false;
+        }
+
+        error.innerHTML = ""
+        alert("Gender selected successfully!");
+        return true;
+    }
+    </script>
+</body>
+</html>

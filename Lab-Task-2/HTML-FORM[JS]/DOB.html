@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date of Birth</title>
+</head>
+<body>
+    <fieldset>
+        <h2>Date of Birth</h2>
+        <form action="" onsubmit="return validateDOB()">
+            <input type="text" id= "dd" size="2" placeholder="dd"> 
+            <span>/</span>
+            <input type="text" id= "mm" size="2" placeholder="mm">
+            <span>/</span>
+            <input type="text" id= "yyyy" size="4" placeholder="yyyy"><br><br>
+            <input type="submit" value="Submit">
+            <p id="error" style="color:blue;"></p>
+        </form>
+    </fieldset>
+
+    <script>
+        function validateDOB() {
+
+        let dd = document.getElementById("dd").value;
+        let mm = document.getElementById("mm").value;
+        let yyyy = document.getElementById("yyyy").value;
+        let error = document.getElementById("error");
+
+        error.innerHTML = "";
+
+        if (dd == "" || mm == "" || yyyy == "") {
+            error.innerHTML = "All fields are required.";
+            return false;
+        }
+
+        if (isNaN(dd) || isNaN(mm) || isNaN(yyyy)) {
+            error.innerHTML = "Date must be valid numbers.";
+            return false;
+        }
+
+        dd = parseInt(dd);
+        mm = parseInt(mm);
+        yyyy = parseInt(yyyy);
+
+        if (dd < 1 || dd > 31) {
+            error.innerHTML = "Day must be between 1 and 31.";
+            return false;
+        }
+
+        if (mm < 1 || mm > 12) {
+            error.innerHTML = "Month must be between 1 and 12.";
+            return false;
+        }
+
+        if (yyyy < 1900 || yyyy > 2016) {
+            error.innerHTML = "Year must be between 1900 and 2016.";
+            return false;
+        }
+
+        alert("Valid Date of Birth!");
+        return false; 
+    }
+    </script>
+</body>
+</html>
