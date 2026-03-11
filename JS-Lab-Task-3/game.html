@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+</head>
+<body>
+    <h2>Tic Tac Toe</h2>
+    <p id="status">Current Player: X</p>
+
+    <div id="board">
+        <button class="cell"></button>
+        <button class="cell"></button>
+        <button class="cell"></button><br>
+
+        <button class="cell"></button>
+        <button class="cell"></button>
+        <button class="cell"></button><br>
+
+        <button class="cell"></button>
+        <button class="cell"></button>
+        <button class="cell"></button>
+    </div>
+
+    <br>
+    <button onclick="resetGame()">Reset</button>
+
+    <script>
+
+        let cells = document.getElementsByClassName("cell");
+        let statusText = document.getElementById("status");
+
+        let currentPlayer = "X";
+        let gameOver = false;
+
+        let win = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+        ];
+
+        for(let i=0;i<cells.length;i++){
+            cells[i].addEventListener("click", playGame);
+        }
+
+        function playGame(){
+
+            if(this.innerHTML != "" || gameOver){
+                return;
+            }
+
+            this.innerHTML = currentPlayer;
+
+            checkWinner();
+
+            if(!gameOver){
+                if(currentPlayer=="X"){
+                    currentPlayer="O";
+                }else{
+                    currentPlayer="X";
+                }
+
+                statusText.innerHTML="Current Player: "+currentPlayer;
+            }
+        }
+
+        function checkWinner(){
+
+        for(let i=0;i<8;i++){
+
+            let a = win[i][0];
+            let b = win[i][1];
+            let c = win[i][2];
+
+                if(cells[a].innerHTML!="" &&
+                cells[a].innerHTML==cells[b].innerHTML &&
+                cells[a].innerHTML==cells[c].innerHTML){
+
+                    statusText.innerHTML="Player "+currentPlayer+" Wins!";
+                    gameOver=true;
+                    return;
+                }
+            }
+
+            var filled=true;
+
+            for(let i=0;i<9;i++){
+                if(cells[i].innerHTML==""){
+                    filled=false;
+                }
+            }
+
+            if(filled && !gameOver){
+                statusText.innerHTML="It's a Draw!";
+                gameOver=true;
+            }
+        }
+
+        function resetGame(){
+            for(let i=0;i<9;i++){
+                cells[i].innerHTML="";
+            }
+
+            currentPlayer="X";
+            gameOver=false;
+
+            statusText.innerHTML="Current Player: X";
+        }
+
+    </script>
+
+    </body>
+</html>
